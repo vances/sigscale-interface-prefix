@@ -13,7 +13,7 @@ metadata package = [
 namespace org.sigscale.interfaces.prefix
 
 use org.wasmcloud.model#wasmbus
-use org.wasmcloud.model#U32
+use org.wasmcloud.model#U64
 
 /// The PrefixTable service has methods for table and row lifecycle management
 @wasmbus(
@@ -102,7 +102,7 @@ structure InsertPrefixRequest {
 
     /// Value
     @required
-    value: U32
+    value: U64
 }
 
 /// Response to InsertPrefix request
@@ -155,7 +155,7 @@ structure MatchPrefixResponse {
 
     /// Value
     @required
-    value: U32,
+    value: U64,
 
     /// Optional string w/rejection reason
     failReason: String,

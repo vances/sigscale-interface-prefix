@@ -371,7 +371,7 @@ pub struct InsertPrefixRequest {
     pub prefix: String,
     /// Value
     #[serde(default)]
-    pub value: u32,
+    pub value: u64,
 }
 
 // Encode InsertPrefixRequest as CBOR and append to output stream
@@ -390,7 +390,7 @@ where
     e.str("prefix")?;
     e.str(&val.prefix)?;
     e.str("value")?;
-    e.u32(val.value)?;
+    e.u64(val.value)?;
     Ok(())
 }
 
@@ -402,7 +402,7 @@ pub fn decode_insert_prefix_request(
     let __result = {
         let mut name: Option<String> = None;
         let mut prefix: Option<String> = None;
-        let mut value: Option<u32> = None;
+        let mut value: Option<u64> = None;
 
         let is_array = match d.datatype()? {
             wasmbus_rpc::cbor::Type::Array => true,
@@ -419,7 +419,7 @@ pub fn decode_insert_prefix_request(
                 match __i {
                     0 => name = Some(d.str()?.to_string()),
                     1 => prefix = Some(d.str()?.to_string()),
-                    2 => value = Some(d.u32()?),
+                    2 => value = Some(d.u64()?),
                     _ => d.skip()?,
                 }
             }
@@ -429,7 +429,7 @@ pub fn decode_insert_prefix_request(
                 match d.str()? {
                     "name" => name = Some(d.str()?.to_string()),
                     "prefix" => prefix = Some(d.str()?.to_string()),
-                    "value" => value = Some(d.u32()?),
+                    "value" => value = Some(d.u64()?),
                     _ => d.skip()?,
                 }
             }
@@ -659,7 +659,7 @@ pub struct MatchPrefixResponse {
     pub success: bool,
     /// Value
     #[serde(default)]
-    pub value: u32,
+    pub value: u64,
 }
 
 // Encode MatchPrefixResponse as CBOR and append to output stream
@@ -682,7 +682,7 @@ where
     e.str("success")?;
     e.bool(val.success)?;
     e.str("value")?;
-    e.u32(val.value)?;
+    e.u64(val.value)?;
     Ok(())
 }
 
@@ -694,7 +694,7 @@ pub fn decode_match_prefix_response(
     let __result = {
         let mut fail_reason: Option<Option<String>> = Some(None);
         let mut success: Option<bool> = None;
-        let mut value: Option<u32> = None;
+        let mut value: Option<u64> = None;
 
         let is_array = match d.datatype()? {
             wasmbus_rpc::cbor::Type::Array => true,
@@ -718,7 +718,7 @@ pub fn decode_match_prefix_response(
                         }
                     }
                     1 => success = Some(d.bool()?),
-                    2 => value = Some(d.u32()?),
+                    2 => value = Some(d.u64()?),
                     _ => d.skip()?,
                 }
             }
@@ -735,7 +735,7 @@ pub fn decode_match_prefix_response(
                         }
                     }
                     "success" => success = Some(d.bool()?),
-                    "value" => value = Some(d.u32()?),
+                    "value" => value = Some(d.u64()?),
                     _ => d.skip()?,
                 }
             }
